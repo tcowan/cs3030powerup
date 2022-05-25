@@ -26,6 +26,6 @@ sudo update-locale LANG=en_US.UTF-8
 
 
 echo "Installing bundler..."
-gem install bundler
+sudo gem install bundler
 bundle update
 echo -e "\n\nCS 3030 assignments can now be completed and tested on this system"
