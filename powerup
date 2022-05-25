@@ -1,0 +1,28 @@
+#!/bin/bash
+
+echo -e "This script will attempt to install a number of packages on this system.\n\nYou will need root access."
+if [ ! -f Gemfile  ]
+	then
+		echo -e "\nCreating a simple Gemfile to aid in installing Cucumber"
+		echo -e "source 'https://rubygems.org'\ngroup :test do\n\tgem 'cucumber'\n\tgem 'aruba'\nend\n" >Gemfile
+fi
+# Update the list of packages
+sudo apt-get update
+# Install pre-requisite packages.
+sudo apt-get install -y wget apt-transport-https software-properties-common
+# Download the Microsoft repository GPG keys
+wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+# Register the Microsoft repository GPG keys
+sudo dpkg -i packages-microsoft-prod.deb
+# Update the list of packages after we added packages.microsoft.com
+sudo apt-get update
+# Install apps including PowerShell
+sudo apt-get -y install ruby-full build-essential powershell python2 python3 lynx locales locales-all vim
+sudo echo 'America/Denver' > /etc/timezone
+sudo rm /etc/localtime
+sudo dpkg-reconfigure -f noninteractive tzdata
+
+echo "Installing bundler..."
+gem install bundler
+bundle update
+echo -e "\n\nCS 3030 assignments can now be completed and tested on this system"
