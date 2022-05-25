@@ -21,6 +21,9 @@ sudo apt-get -y install ruby-full build-essential powershell python2 python3 lyn
 sudo echo 'America/Denver' > /etc/timezone
 sudo rm /etc/localtime
 sudo dpkg-reconfigure -f noninteractive tzdata
+sudo locale-gen en_US.UTF-8
+sudo update-locale LANG=en_US.UTF-8
+
 
 echo "Installing bundler..."
 gem install bundler
