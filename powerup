@@ -1,6 +1,12 @@
 #!/bin/bash
+if [ ! `whoami` == "root" ]
+then
+	echo "Execute this script as root:"
+	echo "sudo $0"
+	exit 1
+fi
 
-echo -e "This script will attempt to install a number of packages on this system.\n\nYou will need root access."
+echo -e "This script will attempt to install a number of packages on this system.\n"
 if [ ! -f Gemfile  ]
 	then
 		echo -e "\nCreating a simple Gemfile to aid in installing Cucumber"
@@ -17,7 +23,7 @@ sudo dpkg -i packages-microsoft-prod.deb
 # Update the list of packages after we added packages.microsoft.com
 sudo apt-get update
 # Install apps including PowerShell
-sudo apt-get -y install ruby-full build-essential powershell python2 python3 lynx locales locales-all vim sqlite3
+sudo apt-get -y install ruby-full build-essential powershell python2 python3 lynx locales locales-all vim nano sqlite3
 sudo echo 'America/Denver' > /etc/timezone
 sudo rm /etc/localtime
 sudo dpkg-reconfigure -f noninteractive tzdata
@@ -27,5 +33,7 @@ sudo update-locale LANG=en_US.UTF-8
 
 echo "Installing bundler..."
 sudo gem install bundler
-bundle update
+sudo bundle update
 echo -e "\n\nCS 3030 assignments can now be completed and tested on this system"
+echo -e "\n\nYou need to close this terminal window and open a new one."
+echo -e "\n\nDo not execute cucumber as root"
