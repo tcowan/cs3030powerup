@@ -23,7 +23,7 @@ sudo dpkg -i packages-microsoft-prod.deb
 # Update the list of packages after we added packages.microsoft.com
 sudo apt-get update
 # Install apps including PowerShell
-sudo apt-get -y install ruby-full build-essential powershell python2 python3 python lynx locales locales-all vim nano sqlite3
+sudo apt-get -y install ruby-full ruby-build ruby-dev build-essential powershell python2 python3 python lynx locales locales-all vim nano sqlite3
 sudo echo 'America/Denver' > /etc/timezone
 sudo rm /etc/localtime
 sudo dpkg-reconfigure -f noninteractive tzdata
