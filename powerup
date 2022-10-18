@@ -1,4 +1,13 @@
 #!/bin/bash
+echo -e "\nNOTICE: This script has been tested only on Ubunbu 20.04 and 22.04\n"
+os=$(lsb_release -rs)
+if [ ! $os == "20.04" ] || [ ! $os == "22.04" ]
+then
+	echo "OS release $os detected and is an unsupported Linux release"
+	echo "Script terminating and was unsucessful."
+	exit 1
+fi
+
 if [ ! `whoami` == "root" ]
 then
 	echo "Execute this script as root:"
@@ -23,7 +32,17 @@ sudo dpkg -i packages-microsoft-prod.deb
 # Update the list of packages after we added packages.microsoft.com
 sudo apt-get update
 # Install apps including PowerShell
+
+if [ $os == "20.04" ] 
+then
 sudo apt-get -y install ruby-full ruby-build ruby-dev build-essential powershell python2 python3 python lynx locales locales-all vim nano sqlite3
+fi
+
+if [ $os == "22.04" ] 
+then
+sudo apt-get -y install ruby-full ruby-build ruby-dev build-essential powershell python2 python3 2to3 python2-minimal python2 dh-python python-is-python3 lynx locales locales-all vim nano sqlite3
+fi
+
 sudo echo 'America/Denver' > /etc/timezone
 sudo rm /etc/localtime
 sudo dpkg-reconfigure -f noninteractive tzdata
