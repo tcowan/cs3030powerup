@@ -1,7 +1,8 @@
 #!/bin/bash
 echo -e "\nNOTICE: This script has been tested only on Ubunbu 20.04 and 22.04\n"
 os=$(lsb_release -rs)
-if [ ! $os == "20.04" ] || [ ! $os == "22.04" ]
+os=${os:0:5}
+if [ ! $os == "20.04" ] && [ ! $os == "22.04" ]
 then
 	echo "OS release $os detected and is an unsupported Linux release"
 	echo "Script terminating and was unsucessful."
