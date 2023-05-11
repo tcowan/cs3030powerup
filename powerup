@@ -41,7 +41,7 @@ fi
 
 if [ $os == "22.04" ] 
 then
-sudo apt-get -y install ruby-full ruby-build ruby-dev build-essential powershell python2 python3 2to3 python2-minimal python2 dh-python python-is-python3 lynx locales locales-all vim nano sqlite3
+sudo apt-get -y install ruby-full ruby-build ruby-dev build-essential python2 python3 2to3 python2-minimal python2 dh-python python-is-python3 lynx locales locales-all vim nano sqlite3
 fi
 
 sudo echo 'America/Denver' > /etc/timezone
