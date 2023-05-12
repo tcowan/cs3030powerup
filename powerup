@@ -22,21 +22,12 @@ if [ ! -f Gemfile  ]
 		echo -e "\nCreating a simple Gemfile to aid in installing Cucumber"
 		echo -e "source 'https://rubygems.org'\ngroup :test do\n\tgem 'cucumber'\n\tgem 'aruba'\nend\n" >Gemfile
 fi
-# Update the list of packages
-sudo apt-get update
-# Install pre-requisite packages.
-sudo apt-get install -y wget apt-transport-https software-properties-common
-# Download the Microsoft repository GPG keys
-wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
-# Register the Microsoft repository GPG keys
-sudo dpkg -i packages-microsoft-prod.deb
-# Update the list of packages after we added packages.microsoft.com
-sudo apt-get update
-# Install apps including PowerShell
+# call a separate script to install Powershell
+sudo ./ps.sh
 
 if [ $os == "20.04" ] 
 then
-sudo apt-get -y install ruby-full ruby-build ruby-dev build-essential powershell python2 python3 python lynx locales locales-all vim nano sqlite3
+sudo apt-get -y install ruby-full ruby-build ruby-dev build-essential python2 python3 python lynx locales locales-all vim nano sqlite3
 fi
 
 if [ $os == "22.04" ] 
